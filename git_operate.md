@@ -19,3 +19,4 @@
 	```"git branch feature-A"+"git checkout feature-A";``` 
 - git merge --no-f feature-A
 - git reset --hard f20b6fef33b0c8b7c01263d097dd30e97f863035
+- git rebase -i HEAD~n 最近的n个历史更改的哈希值压缩成为一个，将pick改成fixup
