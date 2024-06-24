@@ -3,4 +3,3 @@
 My goal is completing the procedure of my master's thesis, including a cooperation task, a dictator game and 48 moral dilemma judgments. 
 *course goal too*
 - feature-A
-
