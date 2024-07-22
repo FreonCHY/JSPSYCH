@@ -235,9 +235,9 @@ let introduction_trial = {
 	type: jsPsychInstructions,
 	pages: [
 	'<div class="title">欢迎来到本次实验!</div><p>本次实验分为三个部分，接下来将逐一讲解三部分的内容，在讲解完毕后会进入练习环节！</p>',
-	'<div class="title">环节一：字母搜索任务</div>'+'<text1>该任务的目标判断出指定字母是否存在，在该部分会出现一个字母矩阵，你需要判断字母R是否包含在矩阵中。<br/>当你和同伴都完成该任务时会获得共同积分20，该积分和被试费相关。<br/></text1>'+'<img border="0" src="1.png" alt="字母矩阵" width="304" height="228">',
-	'<div class="title">环节二：积分分配环节</div>将根据你和同伴在环节一的任务成绩判定谁为公共积分分配者。分配者可以将公共积分分配给自己和同伴。<br/>'+'<img border="0" src="1.png" alt="分配结果" width="304" height="228">',
-	'<div class="title">环节三：情景故事</div>在该环节，你需要将自己代入到故事情景中去，假如你是主人公，你会怎么办？<br/><img border="0" src="1.png" alt="情景故事" width="304" height="228"><br/><br/>你是否理解了本实验的三个部分？点击下一页将进入练习环节！！！'
+	'<div class="title">环节一：字母搜索任务</div>'+'<text1>该任务的目标判断出指定字母是否存在，在该部分会出现一个字母矩阵，你需要判断字母R是否包含在矩阵中。<br/>当你和同伴都完成该任务时会获得共同积分20，该积分和被试费相关。<br/></text1>'+'<img border="0" src="charmatrix.png" alt="字母矩阵" width="304" height="228">',
+	'<div class="title">环节二：积分分配环节</div>将根据你和同伴在环节一的任务成绩判定谁为公共积分分配者。分配者可以将公共积分分配给自己和同伴。<br/>'+'<img border="0" src="dictator_game.png" alt="分配结果" width="304" height="228">',
+	'<div class="title">环节三：情景故事</div>在该环节，你需要将自己代入到故事情景中去，假如你是主人公，你会怎么办？<br/><img border="0" src="CNI.png" alt="情景故事" width="304" height="228"><br/><br/>你是否理解了本实验的三个部分？点击下一页将进入练习环节！！！'
 	],
 	button_label_next: "下一页",
 	button_label_previous: "上一页",
@@ -362,7 +362,7 @@ let CNI_trial={
 		{
 			stimulus:function(){
 				let CNIcontent=`<div class="story">${jsPsych.timelineVariable('story')}</div>`;
-				CNIcontent+=`<div class="question">${jsPsych.timelineVariable('question')}</div>`;
+				CNIcontent+=`<br/><div class="question">${jsPsych.timelineVariable('question')}</div>`;
 				return CNIcontent;
 				
 			},
@@ -381,6 +381,6 @@ let save_trial={
 
 
 
-// jsPsych.run([practice,charmatrix_trial]);
-jsPsych.run([introduction_trial,practice,charmatrix_trial,dictator_game,CNI_trial,save_trial]);
+jsPsych.run([CNI_trial]);
+// jsPsych.run([introduction_trial,practice,charmatrix_trial,dictator_game,CNI_trial,save_trial]);
                                  
