@@ -1,0 +1,103 @@
+body { 
+	font-size:20px;
+ }
+
+
+
+.title{                                                          /*title选择器控制的是介绍部分的标题，包括位置与大小*/
+	position: fixed ;
+	text-align:center;
+	top: 10%; 
+	font-size:60px;
+}
+.jspsych-instructions-nav{                                     /*此选择器控制的是instruction部分的按钮的位置 */
+	position: absolute !important;
+	bottom: 8vh; 
+	left:42%;
+} 
+
+#jspsych-survey-html-form-next{
+	position: absolute !important;
+	bottom: 8vh; 
+	left:42%;
+}
+
+.anniu{                                                         /*用于强调字母搜索任务的按键*/
+	background-color: #F2F2EE;
+	color:red;
+	font-size:50px;
+	margin:10px;
+	padding:5px;
+	border:2px solid pink ;
+	height:60px;
+	width:60px;
+}
+
+.char_block {                                                     /*每一个字母块的样式*/
+	padding:1%;
+	width:23%;
+	height:75px;
+	font-size:50px;
+	color:red;
+	display:inline-block;
+	
+}
+.matrix_block{                                                    /*每一个字母矩阵的样式*/
+	display:flex;
+	flex-flow:row wrap;
+	justify-content:space-evenly;
+	align-content:flex-start:
+}
+
+bottom{                                                           /*bottom用于保持在底部同一位置*/
+	position: absolute !important;
+	bottom: 8vh; 
+	left:42%;
+}
+
+/* 用于添加一个点点点的加载效果的动画 */
+ .loading-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+
+        .loading-dots span {
+            animation: blink 1.4s infinite both;
+            display: inline-block;
+            margin: 0 2px;
+        }
+
+        .loading-dots span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+		.loading-dots span:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+		.loading-dots span:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+		.loading-dots span:nth-child(6) {
+            animation-delay: 1s;
+        }
+
+        @keyframes blink {
+            0%, 20%, 50%, 80%, 100% {
+                transform: scale(1);
+            }
+            40% {
+                transform: scale(1.3);
+            }
+            60% {
+                transform: scale(1.3);
+            }
+        }
