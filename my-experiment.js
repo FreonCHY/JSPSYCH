@@ -13,6 +13,9 @@ let trialname={
 	}
 }
 */
+//推荐使用“alt+0”折叠所有代码块，然后需要时再展开“alt+shift+0”
+
+
 //生成字母搜索任务的矩阵
 function character_matrix(){
 	let char_matrix=['',''];
@@ -235,9 +238,9 @@ let introduction_trial = {
 	type: jsPsychInstructions,
 	pages: [
 	'<div class="title">欢迎来到本次实验!</div><p>本次实验分为三个部分，接下来将逐一讲解三部分的内容，在讲解完毕后会进入练习环节！</p>',
-	'<div class="title">环节一：字母搜索任务</div>'+'<text1>该任务的目标判断出指定字母是否存在，在该部分会出现一个字母矩阵，你需要判断字母R是否包含在矩阵中。<br/>当你和同伴都完成该任务时会获得共同积分20，该积分和被试费相关。<br/></text1>'+'<img border="0" src="charmatrix.png" alt="字母矩阵" width="304" height="228">',
-	'<div class="title">环节二：积分分配环节</div>将根据你和同伴在环节一的任务成绩判定谁为公共积分分配者。分配者可以将公共积分分配给自己和同伴。<br/>'+'<img border="0" src="dictator_game.png" alt="分配结果" width="304" height="228">',
-	'<div class="title">环节三：情景故事</div>在该环节，你需要将自己代入到故事情景中去，假如你是主人公，你会怎么办？<br/><img border="0" src="CNI.png" alt="情景故事" width="304" height="228"><br/><br/>你是否理解了本实验的三个部分？点击下一页将进入练习环节！！！'
+	'<div class="title">环节一：字母搜索任务</div>'+'<text1>该任务的目标判断出指定字母是否存在，在该部分会出现一个字母矩阵，你需要判断字母R是否包含在矩阵中。<br/>当你和同伴都完成该任务时会获得共同积分20，该积分和被试费相关。<br/></text1>'+'<img border="0" src="./picture/matrix.png" alt="字母矩阵" width="500" >',
+	'<div class="title">环节二：积分分配环节</div>将根据你和同伴在环节一的任务成绩判定谁为公共积分分配者。分配者可以将公共积分分配给自己和同伴。<br/>'+'<img border="0" src="./picture/dictator_game.png" alt="分配结果" width="700" >',
+	'<div class="title">环节三：情景故事</div>在该环节，你需要将自己代入到故事情景中去，假如你是主人公，你会怎么办？<br/><img border="0" src="./picture/switch.png" alt="情景故事" width="304" height="228"><br/><br/>你是否理解了本实验的三个部分？点击下一页将进入练习环节！！！'
 	],
 	button_label_next: "下一页",
 	button_label_previous: "上一页",
@@ -354,25 +357,49 @@ let dictator_game={
 	]
 }
 
-//（5）CNI模型，道德判断的实验材料，类似于问卷                                 //（5）CNI模型，道德判断，因变量
-let CNI_trial={
-	type:jsPsychHtmlKeyboardResponse,
-	choices:['f','j'],
+/*（5）CNI模型，道德判断的实验材料，类似于问卷                                 
+// let CNI_trial={
+	// type:jsPsychHtmlKeyboardResponse,
+	// choices:['f','j'],
+	// timeline:[
+		// {
+			// stimulus:function(){
+				// let CNIcontent=`<div class="story">${jsPsych.timelineVariable('story')}</div>`;
+				// CNIcontent+=`<div class="question">${jsPsych.timelineVariable('question')}</div>`;
+				// return CNIcontent;
+				
+			// },
+		// }
+	// ],
+	// CNI实验材料，由于浏览器无法自由读取本地文件，因此只好将文字全写入js中
+	// timeline_variables:CNI_material,	
+// }
+*/
+
+var CNI_trial={                                                               //（5）CNI模型，道德判断，因变量
+	type:jsPsychSameDifferentHtml,
+	first_stim_duration:-100,
+	second_stim_duration:-100,
+	gap_duration:200,
+	prompt: `<p>可接受按F.</p>
+			<p>不可接受按J.</p>`,
+	same_key: 'f',
+	different_key: 'j',
+	answer: 'different',
 	timeline:[
 		{
-			stimulus:function(){
-				let CNIcontent=`<div class="story">${jsPsych.timelineVariable('story')}</div>`;
-				CNIcontent+=`<br/><div class="question">${jsPsych.timelineVariable('question')}</div>`;
-				return CNIcontent;
-				
+			stimuli:function(){ //直接使用的话会直接显示[object][object]，使用函数返回的是html字符串
+				let story=`<div class="story">${jsPsych.timelineVariable('story')}</div>`;
+				let question=`<div class="question">${jsPsych.timelineVariable('question')}</div>`;
+				return [story,question];
+				},		
 			},
-		}
 	],
 	//CNI实验材料，由于浏览器无法自由读取本地文件，因此只好将文字全写入js中
 	timeline_variables:CNI_material,	
 }
 
-let save_trial={
+let save_trial={                                                              //（6）保存数据部分
 	type:jsPsychHtmlKeyboardResponse,
 	choices:'s',
 	stimulus:"实验结束，请呼叫主试!!!（实际为按S键保存实验数据，这个括号里的话不让被试看见。）",
@@ -381,6 +408,6 @@ let save_trial={
 
 
 
-jsPsych.run([CNI_trial]);
-// jsPsych.run([introduction_trial,practice,charmatrix_trial,dictator_game,CNI_trial,save_trial]);
+// jsPsych.run([CNI_trial]);
+jsPsych.run([introduction_trial,practice,charmatrix_trial,dictator_game,CNI_trial,save_trial]);
                                  
