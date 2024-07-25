@@ -36,6 +36,7 @@ function character_matrix(){
 }
 
 //CNI实验材料，由于浏览器无法自由读取本地文件，因此只好将文字全写入js中
+//这部分强烈建议折叠
 var CNI_material=[
 	{
     story: "你是国家的总统。一个在冲突区活动的游击队绑架了一名你国家的记者，并威胁如果你的政府不支付一百万美元的赎金，就要斩首他。\n该组织将使用赎金购买用于游击战的武器，这将导致许多人的死亡。国会已批准支付赎金，但你有权否决付款。",
@@ -237,10 +238,11 @@ let jsPsych = initJsPsych();                                                    
 let introduction_trial = {
 	type: jsPsychInstructions,
 	pages: [
-	'<div class="title">欢迎来到本次实验!</div><p>本次实验分为三个部分，接下来将逐一讲解三部分的内容，在讲解完毕后会进入练习环节！</p>',
-	'<div class="title">环节一：字母搜索任务</div>'+'<text1>该任务的目标判断出指定字母是否存在，在该部分会出现一个字母矩阵，你需要判断字母R是否包含在矩阵中。<br/>当你和同伴都完成该任务时会获得共同积分20，该积分和被试费相关。<br/></text1>'+'<img border="0" src="./picture/matrix.png" alt="字母矩阵" width="500" >',
-	'<div class="title">环节二：积分分配环节</div>将根据你和同伴在环节一的任务成绩判定谁为公共积分分配者。分配者可以将公共积分分配给自己和同伴。<br/>'+'<img border="0" src="./picture/dictator_game.png" alt="分配结果" width="700" >',
-	'<div class="title">环节三：情景故事</div>在该环节，你需要将自己代入到故事情景中去，假如你是主人公，你会怎么办？<br/><img border="0" src="./picture/switch.png" alt="情景故事" width="304" height="228"><br/><br/>你是否理解了本实验的三个部分？点击下一页将进入练习环节！！！'
+	`<div class="title">欢迎来到本次实验!</div>
+	<div>本次实验分为三个部分，接下来将逐一讲解三部分的内容，在讲解完毕后会进入练习环节！</div>`,
+	'<div class="title">环节一：字母搜索任务</div>'+'<div class="main_text">该任务的目标判断出指定字母是否存在，在该部分会出现一个字母矩阵，你需要判断字母R是否包含在矩阵中。<br/>当你和同伴都完成该任务时会获得共同积分20，该积分和被试费相关。<br/></div>'+'<div><img align="center" border="0" src="./picture/matrix.png" alt="字母矩阵" width="500" ></div>',
+	'<div class="title">环节二：积分分配环节</div>'+'<div class="main_text">将根据你和同伴在环节一的任务成绩判定谁为公共积分分配者。分配者可以将公共积分分配给自己和同伴。<br/></div>'+'<div><img align="center" border="0" src="./picture/dictator_game.png" alt="分配结果" width="700" ></div>',
+	'<div class="title">环节三：情景故事</div>'+'<div class="main_text">在该环节，你需要将自己代入到故事情景中去，假如你是主人公，你会怎么办？<br/></div>'+'<div><img align="center" border="0" src="./picture/switch.png" alt="情景故事" width="400" ><br/></div>'+'<div class="main_text">你是否理解了本实验的三个部分？点击下一页将进入练习环节！！！</div>'
 	],
 	button_label_next: "下一页",
 	button_label_previous: "上一页",
@@ -257,21 +259,23 @@ let practice = {
 			key_answer: practice_matrix[1],
 			text_answer: 'letter',
 			choices: ['f', 'j'],
-			correct_text: "<p class='prompt'>正确，你判断对了！！！！.</p>",
-			incorrect_text: "<p class='prompt'>错误，你判断错了！！！！</p>",
-			feedback_duration:null,
-			prompt: '<p>你发现R时按<button class="anniu">F</button>键，未发现时按<button class="anniu">J</button>键</p>'
+			correct_text: '<div style="color: green;  font-size: 60px; align: center;">正确，你判断对了！！！.</div>',
+			incorrect_text: '<div style="color: red; font-size: 60px; align: center;">错误，你判断错了！！！</div>',
+			feedback_duration:2000,
+			prompt: '<div class="prompt" style="align-items:baseline;">你发现R时按<button class="styled-button">F</button>键，未发现时按<button class="styled-button">J</button>键</div>'
 		},
 		{
 			type: jsPsychSurveyHtmlForm,//独裁者范式练习试次
-			preamble: '<p>恭喜你们完成了合作任务，获得了共同积分20，现在将按照成绩划分角色，分到分配者的人将会对共同积分进行分配</p>',
+			preamble: '<div class="title">恭喜你们完成了合作任务，<br/>获得了共同积分<span style="color:red;">20</span>，<br/>现在将按照字母搜任务的成绩划分角色，分到分配者的人将会对共同积分进行分配</div>',
 			html: '<div>你给自己分配的积分是<input type="text" id="self-box" name="self-score" size="10" /></div><div>你给队友分配的积分是<input type="text" id="teammate-box" name="teammate-score" size="10" /></div>'+'<b>以上是你担任分配者的情况，当你是接受者时，将只会等待并最终看到分配结果</b>',
-			autofocus: 'self-box'
+			autofocus: 'self-box',
+			button_label:"继续下一个环节"
 		},
 		{
 			type:jsPsychHtmlKeyboardResponse,//CNI实验材料练习试次
 			choices:['f','j'],
-			stimulus:"经典电车困境："
+			stimulus:'<div class="story-box">假设在一个电车轨道上被绑了5个人，而它的备用轨道上被绑了1个人，又有一辆失控的电车飞速驶来，而你身边正好有一个摇杆，你可以推动摇杆来让电车驶入备用轨道，杀死那1个人，救下5个人。你也可以什么也不做，杀死5个人，救下1个人。眼看电车就要驶入那片区域了，你必须在很短的时间内做出决定，杀死1个人，救下5个人，还是杀死5个人，救下1个人</div>'+'<div class="question-box">问题是：你觉得此时落下摇杆是可以接受的吗？后续可接受都是按F键，不可接受按J键<div>',
+			prompt:'<div class="prompt"><button class="styled-button">F</button><button class="styled-button">J</button></div>'
 		}
 	]
 }         
@@ -351,7 +355,7 @@ let dictator_game={
 			trial_duration:7000
 		},
 		{
-			stimulus:'你的队友给自己分配的积分是：18<br/>你的队友给你分配的积分是：2<br/><p class="bottom">按任意键进入最后一个环节</p>',
+			stimulus:'<div class="title">你的队友给自己分配的积分是：18;</div>'+'<div class="title">你的队友给你分配的积分是：2;</div>'+'<div class="styled-button">按任意键进入最后一个环节</div>',
 			stimulus_duration:null
 		}
 	]
@@ -381,16 +385,15 @@ var CNI_trial={                                                               //
 	first_stim_duration:-100,
 	second_stim_duration:-100,
 	gap_duration:200,
-	prompt: `<p>可接受按F.</p>
-			<p>不可接受按J.</p>`,
+	prompt:'<div class="prompt"><button class="styled-button">F</button><button class="styled-button">J</button></div>',
 	same_key: 'f',
 	different_key: 'j',
 	answer: 'different',
 	timeline:[
 		{
 			stimuli:function(){ //直接使用的话会直接显示[object][object]，使用函数返回的是html字符串
-				let story=`<div class="story">${jsPsych.timelineVariable('story')}</div>`;
-				let question=`<div class="question">${jsPsych.timelineVariable('question')}</div>`;
+				let story=`<div class="story-box">${jsPsych.timelineVariable('story')}</div>`;
+				let question=`<div class="question-box">${jsPsych.timelineVariable('question')}</div>`;
 				return [story,question];
 				},		
 			},
@@ -408,6 +411,6 @@ let save_trial={                                                              //
 
 
 
-// jsPsych.run([CNI_trial]);
+// jsPsych.run([practice]);
 jsPsych.run([introduction_trial,practice,charmatrix_trial,dictator_game,CNI_trial,save_trial]);
                                  
