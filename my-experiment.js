@@ -251,7 +251,7 @@ let introduction_trial = {
 
 //练习部分                                                                     //(2)练习环节
 var practice_matrix=[].concat(character_matrix());
-let practice = {
+let practice_trial = {
 	timeline:[
 		{
 			type: jsPsychCategorizeHtml,//字母搜索任务练习试次
@@ -259,11 +259,11 @@ let practice = {
 			key_answer: practice_matrix[1],
 			text_answer: 'letter',
 			choices: ['f', 'j'],
-			correct_text: '<div style="color: green;  font-size: 60px; align: center;">正确，你判断对了！！</div>',
-			incorrect_text: '<div style="color: red; font-size: 60px; align: center;">错误，你判断错了！！</div>',
+			correct_text: '<div style="color: green;   align: center;" class="highlighten">正确，你判断对了！！</div>',
+			incorrect_text: '<div style="color: red;  align: center;" class="highlighten">错误，你判断错了！！</div>',
 			feedback_duration:2000,
 			// prompt: '<div style="display:flex; flex-flow:row nowrap; align-items:baseline; justify-content:center;">你发现R时按<button class="styled-button">F</button>键，未发现时按<button class="styled-button">J</button>键</div>'
-			prompt: '<div class="dd">你发现R时按<button class="styled-button">F</button>键，未发现时按<button class="styled-button">J</button>键</div>'
+			prompt: '<div class="prompt">你发现R时按<button class="styled-button">F</button>键，未发现时按<button class="styled-button">J</button>键</div>'
 		},
 		{
 			type: jsPsychSurveyHtmlForm,//独裁者范式练习试次
@@ -275,8 +275,8 @@ let practice = {
 		{
 			type:jsPsychHtmlKeyboardResponse,//CNI实验材料练习试次
 			choices:['f','j'],
-			stimulus:'<div class="story-box">假设在一个电车轨道上被绑了5个人，而它的备用轨道上被绑了1个人，又有一辆失控的电车飞速驶来，而你身边正好有一个摇杆，你可以推动摇杆来让电车驶入备用轨道，杀死那1个人，救下5个人。你也可以什么也不做，杀死5个人，救下1个人。眼看电车就要驶入那片区域了，你必须在很短的时间内做出决定，杀死1个人，救下5个人，还是杀死5个人，救下1个人</div>'+'<div class="question-box">问题是：你觉得此时推动摇杆是可以接受的吗？后续可接受都是按F键，不可接受按J键<div>',
-			prompt:'<div class="dd"><button class="styled-button">F</button><button class="styled-button">J</button></div>'
+			stimulus:'<div class="story-box">假设在一个电车轨道上被绑了5个人，而它的备用轨道上被绑了1个人，又有一辆失控的电车飞速驶来，而你身边正好有一个摇杆，你可以推动摇杆来让电车驶入备用轨道，杀死那1个人，救下5个人。你也可以什么也不做，杀死5个人，救下1个人。眼看电车就要驶入那片区域了，你必须在很短的时间内做出决定，杀死1个人，救下5个人，还是杀死5个人，救下1个人</div>'+'<div class="question-box">问题是：你觉得此时推动摇杆是可以接受的吗？<br/>后续可接受都是按F键，不可接受按J键<div>',
+			prompt:'<div class="prompt"><button class="styled-button">F</button><button class="styled-button">J</button></div>'
 		}
 	]
 }         
@@ -286,8 +286,11 @@ for (let i=0;i<10;i++){
 	my_matrix.push(character_matrix());
 }
 var again=-1;
-var introduction_charmatrix='<div class="title">任务一介绍</div><div>接下来进行一个字母搜索任务，总共十轮。<br/>你需要判断<span style="color:red; size:30px;">字母R</span>是否包含在矩阵中，请尽可能快且准确，倘若判断错误你需要从头开始本次任务。</div><div>倘若你不是第一次看见这一屏，就只有一个解释，你又做错了</div><div class="dd">请注意，本轮成绩会决定下一个任务的角色分配，请认真！！！！<br/>按空格键正式进入字母搜索任务</div>';
-
+var introduction_charmatrix=`<div class="introductioncss"><div class="title">任务一介绍</div>
+<div>接下来进行一个字母搜索任务，总共十轮。<br/>你需要判断<span style="color:red; size:50px;">字母R</span>是否包含在矩阵中，请尽可能快且准确，倘若判断错误你需要从头开始本次任务。</div>
+<div>倘若你不是第一次看见这一屏，就只有一个解释，你又做错了</div>
+<div>请注意，本轮成绩会决定下一个任务的角色分配，请认真！！！！</div>
+<div class="styled-button">按空格键正式进入字母搜索任务</div></div>`;
 //矩阵部分+往返逻辑
 let charmatrix_trial={
 	type:jsPsychHtmlKeyboardResponse,
@@ -383,18 +386,32 @@ let dictator_game={
 // }
 */
 
-var introduction_CNI='<div class="title">任务三介绍</div><div>你和同伴都已完成额外积分任务，最后进行一个情境任务，你需要将自己代入到故事情境中去，总共48个情境故事。<br/>你需要判断<span style="color:red; size:30px;">执行某一行为</span>是否可接受？</div><div></div><div class="styled-button">按空格键正式进入判断任务！！！</div>';
+again=-1;
+var introduction_CNI='<div class="introductioncss"><div class="title">任务三介绍</div><div>你和同伴都已完成额外积分任务，最后进行一个情境任务，你需要将自己代入到故事情境中去，总共48个情境故事。<br/>你需要判断<span style="color:red; size:30px;">执行某一行为</span>是否可接受？</div><div></div><div class="styled-button">按空格键正式进入判断任务！！！</div></div>';
 var CNI_trial={                                                               //（5）CNI模型，道德判断，因变量
-	type:jsPsychSameDifferentHtml,
-	first_stim_duration:-100,
-	second_stim_duration:-100,
-	gap_duration:200,
-	prompt:'<div class="dd"><button class="styled-button">F</button><button class="styled-button">J</button></div>',
-	same_key: 'f',
-	different_key: 'j',
-	answer: 'different',
 	timeline:[
 		{
+			timeline:[                                                         //此处嵌套一个timeline用于介绍CNI模型的要求，由于要使用conditional_function，哪怕只有一个试次也要使用timeline
+				{
+				type:jsPsychHtmlKeyboardResponse,
+				stimulus:introduction_CNI,
+				choices:' '
+				}
+			],
+			conditional_function:function(){
+				again++;
+				return again==0;                                           //只显示一次情境故事任务介绍
+			},
+		},
+		{
+			type:jsPsychSameDifferentHtml,
+			first_stim_duration:-100,
+			second_stim_duration:-100,
+			gap_duration:200,
+			prompt:'<div class="prompt"><button class="styled-button">F</button><button class="styled-button">J</button></div>',
+			same_key: 'f',
+			different_key: 'j',
+			answer: 'different',
 			stimuli:function(){ //直接使用的话会直接显示[object][object]，使用函数返回的是html字符串
 				let story=`<div class="story-box">${jsPsych.timelineVariable('story')}</div>`;
 				let question=`<div class="question-box">${jsPsych.timelineVariable('question')}</div>`;
@@ -415,6 +432,6 @@ let save_trial={                                                              //
 
 
 
-// jsPsych.run([practice]);
-jsPsych.run([introduction_trial,practice,charmatrix_trial,dictator_game,CNI_trial,save_trial]);
+// jsPsych.run([practice_trial]);
+jsPsych.run([introduction_trial,practice_trial,charmatrix_trial,dictator_game,CNI_trial,save_trial]);
                                  
