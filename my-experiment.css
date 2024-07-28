@@ -1,16 +1,18 @@
-																/*接下来的三个选择器都是修改的官方元素选择器，因此前面都有jspsych部分*/
+body{
+	background-color: #f4f4f4;
+}
+														        /*接下来的三个选择器都是修改的官方元素选择器，因此前面都有jspsych部分*/
 .jspsych-content {                                              /*基本上所有的插件的stimulus都会在这个元素块中，虽然它的父元素是flex布局，但是不知道为什么这个不是flex布局*/
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
+            font-family: 'Arial', sans-serif;       
+            margin: 200px;
             padding: 0;
             display: flex ;
 			flex-flow:column wrap;
-            justify-content: space-evenly;
+            justify-content: space-between;
             align-content: center;
-            height: 100%;
-			max-width:100%;
-			width: 100% ;
+            height: 60%;
+			max-width:80%;
+			width: 80% ;
         }
 
 /* .jspsych-instructions-nav{                                     /*此选择器控制的是instruction部分的按钮的位置 */ */
@@ -22,9 +24,11 @@
 #jspsych-html-keyboard-response-stimulus{                      /*此处控制的是html-keyboard插件的页面布局*/
 	display:flex;
 	flex-flow:column wrap;
+	justify-content:space-between;
 	align-content:center;
-	width:75% !important;
+	width:75% ;
 }
+
 #jspsych-survey-html-form-next{                                 /*这里是希望控制问卷survey插件的下一页的按钮*/
 	position: absolute ;
 	bottom: 8vh; 
@@ -39,18 +43,28 @@
 	line-height:60px;
 }
 
+.introductioncss{                                                 /*介绍部分的样式*/
+	width:50vw;
+	height:50vh;
+	display: flex ;
+	flex-flow:column nowrap;
+	justify-content: space-between;
+	align-items: center;
+}
 
-/* .bottom{                                                         /*bottom用于保持在底部同一位置*/ */
-	/* position: absolute !important; */
-	/* bottom: 8vh;  */
-	/* left:42%; */
-/* } */
+.highlighten{                                                           /*用于特别突显提示词*/
+	font-size: 60px;
+	line-height:70px;
+	
+}
 
-.rowdisplay{                                                          /*用于特别突显提示词，不知道为什么使用该类突显提示词无效*/
+
+.special{                                                            /*用于是下一个样式生效，不知道为什么相同内容时，下面重复的才有效*/
 	display:flex !important;
 	flex-flow:row nowrap;
-	justify-content:center;
+	justify-content:space-evenly;
 	align-items:baseline;
+	
 	/* background-color: #ffb300; */
 	/* color: #fff; */
 	/* font-size:40px; */
@@ -59,7 +73,7 @@
 	/* border:2px solid brown ; */
 }
 
-.dd{                                                            /*用于特别突显提示词*/
+.prompt{                                                            /*用于控制提示词的横向布局样式，保持在同一基线上*/
 	display:flex !important;
 	flex-flow:row nowrap;
 	justify-content:space-evenly;
