@@ -259,10 +259,11 @@ let practice = {
 			key_answer: practice_matrix[1],
 			text_answer: 'letter',
 			choices: ['f', 'j'],
-			correct_text: '<div style="color: green;  font-size: 60px; align: center;">正确，你判断对了！！！.</div>',
-			incorrect_text: '<div style="color: red; font-size: 60px; align: center;">错误，你判断错了！！！</div>',
+			correct_text: '<div style="color: green;  font-size: 60px; align: center;">正确，你判断对了！！</div>',
+			incorrect_text: '<div style="color: red; font-size: 60px; align: center;">错误，你判断错了！！</div>',
 			feedback_duration:2000,
-			prompt: '<div class="prompt" style="align-items:baseline;">你发现R时按<button class="styled-button">F</button>键，未发现时按<button class="styled-button">J</button>键</div>'
+			// prompt: '<div style="display:flex; flex-flow:row nowrap; align-items:baseline; justify-content:center;">你发现R时按<button class="styled-button">F</button>键，未发现时按<button class="styled-button">J</button>键</div>'
+			prompt: '<div class="dd">你发现R时按<button class="styled-button">F</button>键，未发现时按<button class="styled-button">J</button>键</div>'
 		},
 		{
 			type: jsPsychSurveyHtmlForm,//独裁者范式练习试次
@@ -274,8 +275,8 @@ let practice = {
 		{
 			type:jsPsychHtmlKeyboardResponse,//CNI实验材料练习试次
 			choices:['f','j'],
-			stimulus:'<div class="story-box">假设在一个电车轨道上被绑了5个人，而它的备用轨道上被绑了1个人，又有一辆失控的电车飞速驶来，而你身边正好有一个摇杆，你可以推动摇杆来让电车驶入备用轨道，杀死那1个人，救下5个人。你也可以什么也不做，杀死5个人，救下1个人。眼看电车就要驶入那片区域了，你必须在很短的时间内做出决定，杀死1个人，救下5个人，还是杀死5个人，救下1个人</div>'+'<div class="question-box">问题是：你觉得此时落下摇杆是可以接受的吗？后续可接受都是按F键，不可接受按J键<div>',
-			prompt:'<div class="prompt"><button class="styled-button">F</button><button class="styled-button">J</button></div>'
+			stimulus:'<div class="story-box">假设在一个电车轨道上被绑了5个人，而它的备用轨道上被绑了1个人，又有一辆失控的电车飞速驶来，而你身边正好有一个摇杆，你可以推动摇杆来让电车驶入备用轨道，杀死那1个人，救下5个人。你也可以什么也不做，杀死5个人，救下1个人。眼看电车就要驶入那片区域了，你必须在很短的时间内做出决定，杀死1个人，救下5个人，还是杀死5个人，救下1个人</div>'+'<div class="question-box">问题是：你觉得此时推动摇杆是可以接受的吗？后续可接受都是按F键，不可接受按J键<div>',
+			prompt:'<div class="dd"><button class="styled-button">F</button><button class="styled-button">J</button></div>'
 		}
 	]
 }         
@@ -285,7 +286,7 @@ for (let i=0;i<10;i++){
 	my_matrix.push(character_matrix());
 }
 var again=-1;
-var introduction_text='任务一介绍<br/>接下来进行一个字母搜索任务，总共十轮。<br/>你需要判断字母R是否包含在矩阵中，请尽可能快且准确，倘若判断错误你需要从头开始本次任务。<br/><br/>倘若你不是第一次看见这一屏，就只有一个解释，你又做错了<br/><br/><br/>按空格键正式进入字母搜索任务！！！';
+var introduction_charmatrix='<div class="title">任务一介绍</div><div>接下来进行一个字母搜索任务，总共十轮。<br/>你需要判断<span style="color:red; size:30px;">字母R</span>是否包含在矩阵中，请尽可能快且准确，倘若判断错误你需要从头开始本次任务。</div><div>倘若你不是第一次看见这一屏，就只有一个解释，你又做错了</div><div class="dd">请注意，本轮成绩会决定下一个任务的角色分配，请认真！！！！<br/>按空格键正式进入字母搜索任务</div>';
 
 //矩阵部分+往返逻辑
 let charmatrix_trial={
@@ -294,7 +295,7 @@ let charmatrix_trial={
 		{
 			timeline:[                                                         //此处嵌套一个timeline用于介绍字母搜索任务的要求，由于要使用conditional_function，哪怕只有一个试次也要使用timeline
 				{
-				stimulus:introduction_text,
+				stimulus:introduction_charmatrix,
 				choices:' '
 				}
 			],
@@ -341,9 +342,10 @@ let dictator_game={
 	choices:'ALL_KEYS',
 	timeline:[
 		{
-			stimulus:'<p >正在计算成绩，将根据回答时间快慢决定谁是分配者，谁是接受者。<div class="loading-dots"><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span></div></p>',
+			stimulus:'<div ><div>由于双方都已完成环节一，已自动进入环节二，正在计算成绩，将根据回答时间快慢决定谁是分配者，谁是接受者。</div><div class="loading-dots"><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span></div></div>',
 			stimulus_duration:5000,
-			trial_duration:5000
+			trial_duration:5000,
+			choices:''
 		},
 		{
 			stimulus:'由于你的成绩不如队友，已分配你为接受者，对方为分配者！按任意键对方正式进入分配环节！',
@@ -352,16 +354,17 @@ let dictator_game={
 		{
 			stimulus:'<p>你需要等待对方分配积分<div class="loading-dots"><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span></div></p>',
 			stimulus_duration:7000,
-			trial_duration:7000
+			trial_duration:7000,
+			choices:''
 		},
 		{
-			stimulus:'<div class="title">你的队友给自己分配的积分是：18;</div>'+'<div class="title">你的队友给你分配的积分是：2;</div>'+'<div class="styled-button">按任意键进入最后一个环节</div>',
+			stimulus:'<div class="title">你的队友给自己分配的积分是：18!</div>'+'<div class="title">你的队友给你分配的积分是：2!</div>'+'<div class="styled-button">按任意键进入最后一个环节</div>',
 			stimulus_duration:null
 		}
 	]
 }
 
-/*（5）CNI模型，道德判断的实验材料，类似于问卷                                 
+/*（5）CNI模型，道德判断的实验材料，类似于问卷，此处使用的是html插件，但是只能显示一个屏幕，经典范式使用的是两个屏幕，因此使用了same-different-html插件                             
 // let CNI_trial={
 	// type:jsPsychHtmlKeyboardResponse,
 	// choices:['f','j'],
@@ -380,12 +383,13 @@ let dictator_game={
 // }
 */
 
+var introduction_CNI='<div class="title">任务三介绍</div><div>你和同伴都已完成额外积分任务，最后进行一个情境任务，你需要将自己代入到故事情境中去，总共48个情境故事。<br/>你需要判断<span style="color:red; size:30px;">执行某一行为</span>是否可接受？</div><div></div><div class="styled-button">按空格键正式进入判断任务！！！</div>';
 var CNI_trial={                                                               //（5）CNI模型，道德判断，因变量
 	type:jsPsychSameDifferentHtml,
 	first_stim_duration:-100,
 	second_stim_duration:-100,
 	gap_duration:200,
-	prompt:'<div class="prompt"><button class="styled-button">F</button><button class="styled-button">J</button></div>',
+	prompt:'<div class="dd"><button class="styled-button">F</button><button class="styled-button">J</button></div>',
 	same_key: 'f',
 	different_key: 'j',
 	answer: 'different',

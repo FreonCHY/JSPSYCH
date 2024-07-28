@@ -1,4 +1,5 @@
-.jspsych-content {
+																/*接下来的三个选择器都是修改的官方元素选择器，因此前面都有jspsych部分*/
+.jspsych-content {                                              /*基本上所有的插件的stimulus都会在这个元素块中，虽然它的父元素是flex布局，但是不知道为什么这个不是flex布局*/
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -7,15 +8,30 @@
 			flex-flow:column wrap;
             justify-content: space-evenly;
             align-content: center;
-            height: 100vh;
-			width:100vw;
+            height: 100%;
+			max-width:100%;
+			width: 100% ;
         }
-#jspsych-html-keyboard-response-stimulus{
+
+/* .jspsych-instructions-nav{                                     /*此选择器控制的是instruction部分的按钮的位置 */ */
+	/* position: absolute !important; */
+	/* bottom: 8vh;  */
+	/* left:42%; */
+/* }  */
+
+#jspsych-html-keyboard-response-stimulus{                      /*此处控制的是html-keyboard插件的页面布局*/
 	display:flex;
 	flex-flow:column wrap;
-	 width: 75%;
-	 align-content:space-evenly;
+	align-content:center;
+	width:75% !important;
 }
+#jspsych-survey-html-form-next{                                 /*这里是希望控制问卷survey插件的下一页的按钮*/
+	position: absolute ;
+	bottom: 8vh; 
+	left:42%;
+}
+
+
 
 .title{                                                          /*title选择器控制的是介绍部分的标题，包括位置与大小*/
 	align:center;
@@ -24,35 +40,37 @@
 }
 
 
-
-/* .bottom{                                                           /*bottom用于保持在底部同一位置*/ */
+/* .bottom{                                                         /*bottom用于保持在底部同一位置*/ */
 	/* position: absolute !important; */
 	/* bottom: 8vh;  */
 	/* left:42%; */
 /* } */
 
-
-.jspsych-instructions-nav{                                     /*此选择器控制的是instruction部分的按钮的位置 */
-	position: absolute !important;
-	bottom: 8vh; 
-	left:42%;
-} 
-
-#jspsych-survey-html-form-next{
-	position: absolute !important;
-	bottom: 8vh; 
-	left:42%;
+.rowdisplay{                                                          /*用于特别突显提示词，不知道为什么使用该类突显提示词无效*/
+	display:flex !important;
+	flex-flow:row nowrap;
+	justify-content:center;
+	align-items:baseline;
+	/* background-color: #ffb300; */
+	/* color: #fff; */
+	/* font-size:40px; */
+	/* margin:10px; */
+	/* padding:5px; */
+	/* border:2px solid brown ; */
 }
 
-.anniu{                                                         /*用于强调字母搜索任务的按键*/
-	background-color: #F2F2EE;
-	color:red;
-	font-size:40px;
-	margin:10px;
-	padding:5px;
-	border:2px solid pink ;
-	height:60px;
-	width:60px;
+.dd{                                                            /*用于特别突显提示词*/
+	display:flex !important;
+	flex-flow:row nowrap;
+	justify-content:space-evenly;
+	align-items:baseline;
+	
+	/* background-color: #ffb300; */
+	/* color: #fff; */
+	/* font-size:40px; */
+	/* margin:10px; */
+	/* padding:5px; */
+	/* border:2px solid brown ; */
 }
 
 .char_block {                                                     /*每一个字母块的样式*/
@@ -72,7 +90,7 @@
 }
 
 
-/* 用于添加一个点点点的加载效果的动画 */
+/* 用于添加一个点点点的加载效果的动画 */                        /* 用于添加一个点点点的加载效果的动画 */
  .loading-dots {
             display: flex;
             justify-content: center;
@@ -120,104 +138,77 @@
         }
 
 
-
-.story{
-	
-}
-
-
-.question{
-	font-weight:bold;
-}
-
+                                                              /*道德判断情境任务的样式*/
+/* 设计道德判断故事框、问题框的样式，增添一点动画效果，有时候感觉e-prime做出来的效果跟上个世纪的东西一样 */
 .story-box, .question-box {
-  background: #fff8e1; /* 柔和的淡黄色背景 */
-  border: 2px solid #ffd54f; /* 柔和的黄色边框 */
-  border-radius: 10px; /* 圆角 */
-  padding: 20px;
-  margin: 10px 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 轻微的阴影 */
-  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+	
+	background: #fff8e1; /* 柔和的淡黄色背景 */
+	border: 2px solid #ffd54f; /* 柔和的黄色边框 */
+	border-radius: 10px; /* 圆角 */
+	padding: 20px;
+	margin: 10px 0;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 轻微的阴影 */
+	transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .story-box:hover, .question-box:hover {
-  transform: scale(1.05); /* 放大效果 */
-  background-color: #ffecb3; /* 背景颜色变化 */
+	transform: scale(1.05); /* 放大效果 */
+	background-color: #ffecb3; /* 背景颜色变化 */
 }
 
 .story-box {
-  font-size: 1.2em;
-  line-height: 1.6;
-  max-height: 60vh;
-  overflow-y: auto;
+	font-size: 1.2em;
+	line-height: 1.6;
+	max-height: 60vh;
+	overflow-y: auto;
 }
 
 .question-box {
-  font-size: 1.5em;
-  text-align: center;
-  padding: 15px;
+	font-size: 1.5em;
+	text-align: center;
+	padding: 15px;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+	from { opacity: 0; }
+	to { opacity: 1; }
 }
 
 .story-box {
-  animation: fadeIn 0.1s ease-in;
+	animation: fadeIn 0.1s ease-in;
 }
 
 .question-box {
-  animation: fadeIn 0.1s ease-in;
+	animation: fadeIn 0.1s ease-in;
 }
 
 .styled-button {
-  background-color: #ffd54f; /* 柔和的黄色背景 */
-  border: 2px solid #ffca28; /* 深黄色边框 */
-  border-radius: 10px;
-  padding: 10px 20px;
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #fff;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
-  margin-top: 20px;
+	background-color: #ffd54f; /* 柔和的黄色背景 */
+	border: 2px solid #ffca28; /* 深黄色边框 */
+	border-radius: 10px;
+	padding: 10px 20px;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #fff;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+	margin: 20px;
 }
 
 .styled-button:hover {
-  transform: scale(1.1); /* 放大效果 */
-  background-color: #ffb300; /* 深黄色背景颜色变化 */
+	transform: scale(1.1); /* 放大效果 */
+	background-color: #ffb300; /* 深黄色背景颜色变化 */
 }
 
 .button-icon {
-  margin-right: 10px;
-}
-
-@keyframes buttonFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+	margin-right: 10px;
 }
 
 .styled-button {
-  animation: buttonFadeIn 0.1s ease-in;
+	animation: fadeIn 0.1s ease-in;
 }
 
-.prompt{
-	display:flex;
-	flex-flow:row nowrap;
-	
-	justify-content:space-evenly;
-}
-
-.prompt span{
-	background-color: #F2F2EE;
-	color:red;
-	font-size:40px;
-	margin:10px;
-	padding:5px;
-	border:2px solid pink ;
-}
