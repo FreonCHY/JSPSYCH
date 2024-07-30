@@ -336,6 +336,9 @@ let charmatrix_trial={
 		if (jsPsych.data.getLastTimelineData().select('correct').values.some(elem=>elem=='false')){
 			return true;
 		}
+	},
+	on_timeline_finish:function(){
+		again=-1;//重置是否重复的变量值，用于在CNI环节确定介绍部分是否重复！
 	}
 }
 
@@ -386,8 +389,8 @@ let dictator_game={
 // }
 */
 
-again=-1;
-var introduction_CNI='<div class="introductioncss"><div class="title">任务三介绍</div><div>你和同伴都已完成额外积分任务，最后进行一个情境任务，你需要将自己代入到故事情境中去，总共48个情境故事。<br/>你需要判断<span style="color:red; size:30px;">执行某一行为</span>是否可接受？</div><div></div><div class="styled-button">按空格键正式进入判断任务！！！</div></div>';
+
+var introduction_CNI='<div class="introductioncss"><div class="title">任务三介绍</div><div>你和同伴都已完成额外积分任务，最后进行一个情境任务，你需要将自己代入到故事情境中去，总共48个情境故事（仅随机抽取六个供查看）。<br/>你需要判断<span style="color:red; size:30px;">执行某一行为</span>是否可接受？按F键表示可接受，J键不可接受</div><div></div><div class="styled-button">按空格键正式进入判断任务！！！</div></div>';
 var CNI_trial={                                                               //（5）CNI模型，道德判断，因变量
 	timeline:[
 		{
@@ -421,17 +424,22 @@ var CNI_trial={                                                               //
 	],
 	//CNI实验材料，由于浏览器无法自由读取本地文件，因此只好将文字全写入js中
 	timeline_variables:CNI_material,	
+	sample:{                                                                   //仅抽取六个随机顺序作为样例供老师查看
+		type:'without-replacement',
+		size:6
+	}																		
+	
 }
 
 let save_trial={                                                              //（6）保存数据部分
 	type:jsPsychHtmlKeyboardResponse,
 	choices:'s',
-	stimulus:"实验结束，请呼叫主试!!!（实际为按S键保存实验数据，这个括号里的话不让被试看见。）",
+	stimulus:"<div class='title'>实验结束，请呼叫主试!!!<br/>（实际为按S键保存实验数据）</div>",
 	on_finish:function(){jsPsych.data.get().localSave('csv','participant_number.csv');}                       //用于收集数据
 }
 
 
 
-// jsPsych.run([practice_trial]);
+// jsPsych.run([save_trial]);
 jsPsych.run([introduction_trial,practice_trial,charmatrix_trial,dictator_game,CNI_trial,save_trial]);
                                  
